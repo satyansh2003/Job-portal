@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './shared/Navbar';
+import Navbar_t from './shared/Navbar_t';
 import FilterCard from './FilterCard';
 import Job from './Job';
 import { useSelector } from 'react-redux';
@@ -25,10 +25,10 @@ const Jobs = () => {
   }, [allJobs, searchedQuery]);
 
   return (
-    <div className='bg-gray-100'>
-      <Navbar />
+    <div className='w-screen min-h-screen'>
+      <Navbar_t />
       {/* Set the background color to gray-100 for the main container */}
-      <div className="max-w-7xl mx-auto mt-5 bg-gray-100">
+      <div className="max-w-7xl mx-auto mt-5 bg-transparent [box-shadow:1px_1px_12px_3px_rgba(100,100,100,0.8)]">
         <div className="flex gap-5">
           {/* Keep FilterCard's original background styling */}
           <div className="w-20%">

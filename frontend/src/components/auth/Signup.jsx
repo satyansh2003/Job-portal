@@ -10,6 +10,9 @@ import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/redux/authSlice';
 import { Loader2 } from 'lucide-react';
+import { FaGoogle } from "react-icons/fa6";
+import { firebase_auth } from "../Something"
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -21,9 +24,23 @@ const Signup = () => {
     file: ''
   });
 
+  
+
   const { loading, user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function handleGoogleSignUp() {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(firebase_auth, provider).then((result) => {
+      const cred = GoogleAuthProvider.credentialFromResult(result);
+      const token = cred.accessToken;
+      const user = result.user;
+      navigate("/home")
+    }).catch((err) => {
+      alert(err.message)
+    })
+  }
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -208,6 +225,8 @@ const Signup = () => {
               </Button>
             )}
 
+
+
             <div className='text-sm text-[#6B6B6B]'>
               Already have an account?{' '}
               <Link to='/login' className='text-indigo-500 hover:underline'>
@@ -215,6 +234,14 @@ const Signup = () => {
               </Link>
             </div>
           </form>
+
+          <button
+            onClick={handleGoogleSignUp}
+            className='w-full flex justify-center items-center p-2 rounded-md gap-[1rem] transition-all duration-200 bg-[#000000] hover:bg-indigo-600 text-white'
+          >
+            <FaGoogle />
+            <span>SignIn with Google</span>
+          </button>
         </div>
       </div>
     </div>

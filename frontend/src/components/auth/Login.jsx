@@ -10,6 +10,11 @@ import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from '@/redux/authSlice';
 import { Loader2 } from 'lucide-react';
+import {GoogleAuthProvider, getAuth, signInWithPopup} from "firebase/auth"
+import {firebase_auth} from "../Something"
+
+import { FaGoogle } from "react-icons/fa6"
+
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -53,6 +58,19 @@ const Login = () => {
       navigate('/');
     }
   }, [user, navigate]);
+
+  function handleGoogleSignUp() {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(firebase_auth, provider).then((result) => {
+      const cred = GoogleAuthProvider.credentialFromResult(result);
+      const token = cred.accessToken;
+      const user = result.user;
+      navigate("/home")
+    }).catch((err) => {
+      alert(err.message)
+    })
+  }
+
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-100'>
@@ -167,6 +185,13 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <button
+            onClick={handleGoogleSignUp}
+            className='w-full flex justify-center items-center p-2 rounded-md gap-[1rem] transition-all duration-200 bg-[#000000] hover:bg-indigo-600 text-white'
+          >
+            <FaGoogle />
+            <span>SignIn with Google</span>
+          </button>
         </div>
       </div>
     </div>

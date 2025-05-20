@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from './shared/Navbar'
+import Navbar_t from './shared/Navbar_t'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Contact, Mail, Pen } from 'lucide-react'
@@ -20,7 +20,7 @@ const Profile = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar_t />
             <div className='max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8'>
                 <div className='flex justify-between'>
                     <div className='flex items-center gap-4'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Button } from '../ui/button'
 import { Avatar, AvatarImage } from '../ui/avatar'
@@ -14,6 +14,7 @@ const Navbar = () => {
     const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+ 
 
     const logoutHandler = async () => {
         try {
@@ -47,6 +48,7 @@ const Navbar = () => {
                                     <li className='text-[#000000]'><Link to="/">Home</Link></li>
                                     <li className='text-[#000000]'><Link to="/jobs">Jobs</Link></li>
                                     <li className='text-[#000000]'><Link to="/browse">Browse</Link></li>
+                                   
                                 </>
                             )
                         }
